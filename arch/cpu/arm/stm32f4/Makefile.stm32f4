@@ -1,0 +1,21 @@
+### CPU-dependent source files
+
+CONTIKI_CPU_DIRS = . dev
+
+LDSCRIPT ?= $(CONTIKI_CPU)/stm32_flash.ld
+
+CONTIKI_CPU_SOURCEFILES += usart.c clock.c watchdog.c dbg.c rtimer-arch.c system_stm32f4xx.c
+CONTIKI_CPU_SOURCEFILES += stm32f4xx_it.c misc.c stm32f4xx_adc.c
+CONTIKI_CPU_SOURCEFILES += stm32f4xx_can.c stm32f4xx_crc.c stm32f4xx_cryp.c stm32f4xx_cryp_aes.c stm32f4xx_cryp_des.c
+CONTIKI_CPU_SOURCEFILES += stm32f4xx_cryp_tdes.c stm32f4xx_dac.c stm32f4xx_dbgmcu.c stm32f4xx_dcmi.c
+CONTIKI_CPU_SOURCEFILES += stm32f4xx_dma.c stm32f4xx_dma2d.c stm32f4xx_exti.c stm32f4xx_flash.c stm32f4xx_flash_ramfunc.c stm32f4xx_fsmc.c stm32f4xx_gpio.c stm32f4xx_hash.c stm32f4xx_hash_md5.c stm32f4xx_hash_sha1.c stm32f4xx_i2c.c stm32f4xx_iwdg.c stm32f4xx_ltdc.c stm32f4xx_pwr.c stm32f4xx_rcc.c stm32f4xx_rng.c stm32f4xx_rtc.c stm32f4xx_sai.c stm32f4xx_sdio.c stm32f4xx_spi.c stm32f4xx_syscfg.c stm32f4xx_tim.c stm32f4xx_usart.c stm32f4xx_wwdg.c
+CONTIKI_CPU_SOURCEFILES += startup_stm32f40_41xxx.s
+
+#DEBUG_IO_SOURCEFILES += dbg-printf.c dbg-snprintf.c dbg-sprintf.c strformat.c
+
+#USB_SOURCEFILES += usb-core.c cdc-acm.c usb-arch.c usb-serial.c cdc-acm-descriptors.c
+
+### This is what will actually instruct the system to build all of the above
+CONTIKI_SOURCEFILES += $(CONTIKI_CPU_SOURCEFILES)
+
+include $(CONTIKI)/arch/cpu/arm/cortex-m/cm4/Makefile.cm4

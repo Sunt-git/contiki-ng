@@ -123,6 +123,7 @@ rpl_dag_root_set_prefix(uip_ipaddr_t *prefix, uip_ipaddr_t *iid)
 int
 rpl_dag_root_start(void)
 {
+  LOG_INFO("sunt rpl_dag_root_start\n");
   struct uip_ds6_addr *root_if;
   int i;
   uint8_t state;

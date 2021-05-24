@@ -57,6 +57,7 @@
 #include "services/simple-energest/simple-energest.h"
 #include "services/tsch-cs/tsch-cs.h"
 
+
 #include <stdio.h>
 #include <stdint.h>
 /*---------------------------------------------------------------------------*/
@@ -77,7 +78,7 @@ main(void)
   platform_init_stage_one();
 
   clock_init();
-  rtimer_init();
+  //rtimer_init();
   process_init();
   process_start(&etimer_process, NULL);
   ctimer_init();
@@ -97,26 +98,26 @@ main(void)
   netstack_init();
   node_id_init();
 
-  LOG_INFO("Starting " CONTIKI_VERSION_STRING "\n");
+  LOG_INFO("Starting " CONTIKI_VERSION_STRING "\r\n");
   LOG_DBG("TARGET=%s", CONTIKI_TARGET_STRING);
 #ifdef CONTIKI_BOARD_STRING
   LOG_DBG_(", BOARD=%s", CONTIKI_BOARD_STRING);
 #endif
-  LOG_DBG_("\n");
-  LOG_INFO("- Routing: %s\n", NETSTACK_ROUTING.name);
-  LOG_INFO("- Net: %s\n", NETSTACK_NETWORK.name);
-  LOG_INFO("- MAC: %s\n", NETSTACK_MAC.name);
-  LOG_INFO("- 802.15.4 PANID: 0x%04x\n", IEEE802154_PANID);
+  LOG_DBG_("\r\n");
+  LOG_INFO("- Routing: %s\r\n", NETSTACK_ROUTING.name);
+  LOG_INFO("- Net: %s\r\n", NETSTACK_NETWORK.name);
+  LOG_INFO("- MAC: %s\r\n", NETSTACK_MAC.name);
+  LOG_INFO("- 802.15.4 PANID: 0x%04x\r\n", IEEE802154_PANID);
 #if MAC_CONF_WITH_TSCH
-  LOG_INFO("- 802.15.4 TSCH default hopping sequence length: %u\n", (unsigned)sizeof(TSCH_DEFAULT_HOPPING_SEQUENCE));
+  LOG_INFO("- 802.15.4 TSCH default hopping sequence length: %u\r\n", (unsigned)sizeof(TSCH_DEFAULT_HOPPING_SEQUENCE));
 #else /* MAC_CONF_WITH_TSCH */
-  LOG_INFO("- 802.15.4 Default channel: %u\n", IEEE802154_DEFAULT_CHANNEL);
+  LOG_INFO("- 802.15.4 Default channel: %u\r\n", IEEE802154_DEFAULT_CHANNEL);
 #endif /* MAC_CONF_WITH_TSCH */
 
-  LOG_INFO("Node ID: %u\n", node_id);
+  LOG_INFO("Node ID: %u\r\n", node_id);
   LOG_INFO("Link-layer address: ");
   LOG_INFO_LLADDR(&linkaddr_node_addr);
-  LOG_INFO_("\n");
+  LOG_INFO_("\r\n");
 
 #if NETSTACK_CONF_WITH_IPV6
   {
@@ -127,7 +128,7 @@ main(void)
     lladdr = uip_ds6_get_link_local(-1);
     LOG_INFO("Tentative link-local IPv6 address: ");
     LOG_INFO_6ADDR(lladdr != NULL ? &lladdr->ipaddr : NULL);
-    LOG_INFO_("\n");
+    LOG_INFO_("\r\n");
   }
 #endif /* NETSTACK_CONF_WITH_IPV6 */
 

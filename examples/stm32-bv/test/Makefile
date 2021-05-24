@@ -1,0 +1,9 @@
+CONTIKI_PROJECT = hello-world
+all: $(CONTIKI_PROJECT)
+
+UIP_CONF_IPV6=0
+CFLAGS += -DUSE_STDPERIPH_DRIVER
+CFLAGS += -DSTM32F40_41xxx
+
+CONTIKI = ../../..
+include $(CONTIKI)/Makefile.include
