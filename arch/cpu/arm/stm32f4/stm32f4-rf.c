@@ -610,7 +610,7 @@ set_object(radio_param_t param, const void *src, size_t size)
   return RADIO_RESULT_NOT_SUPPORTED;
 }
 /*---------------------------------------------------------------------------*/
-const struct radio_driver cc2538_rf_driver = {
+const struct radio_driver stm32f4_rf_driver = {
   init,
   prepare,
   transmit,

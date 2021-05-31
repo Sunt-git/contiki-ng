@@ -175,7 +175,7 @@ SECTIONS
     . = ALIGN(4);
   } >RAM
 
-  //sunt 21.5.31
+  /*sunt 21.5.31*/
   .malloc :
   {
     . = ALIGN(4);

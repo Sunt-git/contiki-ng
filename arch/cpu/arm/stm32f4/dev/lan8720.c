@@ -175,7 +175,7 @@ void ETH_IRQHandler(void)
 {
 	while(ETH_GetRxPktSize(DMARxDescToGet)!=0) 	//检测是否收到数据包
 	{ 
-		lwip_pkt_handle();		
+		//lwip_pkt_handle();		
 	}
 	ETH_DMAClearITPendingBit(ETH_DMA_IT_R); 	//清除DMA中断标志位
 	ETH_DMAClearITPendingBit(ETH_DMA_IT_NIS);	//清除DMA接收中断标志位
