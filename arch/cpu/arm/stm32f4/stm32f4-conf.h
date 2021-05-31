@@ -2,6 +2,5 @@
 #define STM32F4_CONF_H_
 
 #define LINKADDR_CONF_SIZE 6
-#define NETSTACK_CONF_WITH_IPV6 1
 
 #endif
