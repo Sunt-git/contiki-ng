@@ -37,6 +37,7 @@
 /**
  * The Ethernet address.
  */
+//sunt 21.5.30 MAC地址就是6个字节，48位
 struct ip64_eth_addr {
   uint8_t addr[6];
 };
@@ -48,6 +49,7 @@ void ip64_eth_addr_set(struct ip64_eth_addr *addr);
 /**
  * The Ethernet header.
  */
+//sunt 21.5.30 MAC帧头部
 struct ip64_eth_hdr {
   struct ip64_eth_addr dest;
   struct ip64_eth_addr src;
