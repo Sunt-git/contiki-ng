@@ -1,6 +1,6 @@
 CONTIKI_TARGET_DIRS = .
 
-CONTIKI_TARGET_SOURCEFILES += delay.c leds-arch.c platform.c
+CONTIKI_TARGET_SOURCEFILES += malloc.c delay.c leds-arch.c platform.c
 
 CONTIKI_SOURCEFILES += $(CONTIKI_TARGET_SOURCEFILES)
 
