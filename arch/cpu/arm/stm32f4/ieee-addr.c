@@ -38,6 +38,7 @@
 #include "contiki.h"
 #include "net/linkaddr.h"
 #include "ieee-addr.h"
+#include "stm32f4xx.h"
 
 #include <stdint.h>
 #include <string.h>
