@@ -15,7 +15,7 @@
 **
 **  Environment : Atollic TrueSTUDIO(R)
 **
-**  Distribution: The file is distributed “as is,” without any warranty
+**  Distribution: The file is distributed ï¿½as is,ï¿½ without any warranty
 **                of any kind.
 **
 **  (c)Copyright Atollic AB.
@@ -35,7 +35,7 @@ ENTRY(Reset_Handler)
 /* Highest address of the user mode stack */
 _estack = 0x20020000;    /* end of 128K RAM on AHB bus*/
 
-/*sunt 21.5.21 ¿¿¿¿.ld¿¿¿¿¿¿¿¿¿*/
+/*sunt 21.5.21 ï¿½ï¿½ï¿½ï¿½.ldï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 _stack = end;
 _stack_origin = ORIGIN(RAM) + LENGTH(RAM);
 
@@ -175,7 +175,7 @@ SECTIONS
     . = ALIGN(4);
   } >RAM
 
-  //sunt 21.5.31
+  /*sunt 21.5.31*/
   .malloc :
   {
     . = ALIGN(4);
