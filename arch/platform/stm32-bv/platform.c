@@ -4,6 +4,7 @@
 #include "platform.h"
 #include "ieee-addr.h"
 #include "stm32f4-conf.h"
+#include "linkaddr.h"
 
 void
 platform_init_stage_one(void)
