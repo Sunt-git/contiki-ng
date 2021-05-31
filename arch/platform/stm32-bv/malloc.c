@@ -14,32 +14,27 @@
 
 
 //�ڴ��(4�ֽڶ���)
-u8 mem1base[MEM1_MAX_SIZE] __attribute__((aligned(4)));
-u8 mem2base[MEM2_MAX_SIZE] __attribute__((at(0x68000000))) __attribute__((aligned(4))); //�ⲿSRAM�ڴ��
-u8 mem3base[MEM3_MAX_SIZE] __attribute__((at(0x10000000))) __attribute__((aligned(4))); //�ڲ�CMM�ڴ��
-//�ڴ������
-u16 mem1mapbase[MEM1_ALLOC_TABLE_SIZE];													//�ڲ�SRAM�ڴ��MAP
-u16 mem2mapbase[MEM2_ALLOC_TABLE_SIZE] __attribute__((at(0X68000000+MEM2_MAX_SIZE)));	//�ⲿSRAM�ڴ��MAP
-u16 mem3mapbase[MEM3_ALLOC_TABLE_SIZE] __attribute__((at(0X10000000+MEM3_MAX_SIZE)));	//�ڲ�CCM�ڴ��MAP
-//�ڴ��������	   
-const u32 memtblsize[SRAMBANK]={MEM1_ALLOC_TABLE_SIZE,MEM2_ALLOC_TABLE_SIZE,MEM3_ALLOC_TABLE_SIZE};	//�ڴ����С
-const u32 memblksize[SRAMBANK]={MEM1_BLOCK_SIZE,MEM2_BLOCK_SIZE,MEM3_BLOCK_SIZE};					//�ڴ�ֿ��С
-const u32 memsize[SRAMBANK]={MEM1_MAX_SIZE,MEM2_MAX_SIZE,MEM3_MAX_SIZE};							//�ڴ��ܴ�С
+u8 mem1base[MEM1_MAX_SIZE] __attribute__((aligned(4)));// ;
+u8 mem2base[MEM2_MAX_SIZE] __attribute__((aligned(4))) __attribute__((section(".malloc")));//  ; //�ⲿSRAM�ڴ��
+u8 mem3base[MEM3_MAX_SIZE] __attribute__((aligned(4))) __attribute__((section(".ccmram")));//  ; //�ڲ�CMM�ڴ��
 
-//�ڴ����������
+u16 mem1mapbase[MEM1_ALLOC_TABLE_SIZE];													
+u16 mem2mapbase[MEM2_ALLOC_TABLE_SIZE]; //__attribute__((at(0X68000000+MEM2_MAX_SIZE)));	
+u16 mem3mapbase[MEM3_ALLOC_TABLE_SIZE]; //__attribute__((at(0X10000000+MEM3_MAX_SIZE)));	
+   
+const u32 memtblsize[SRAMBANK]={MEM1_ALLOC_TABLE_SIZE,MEM2_ALLOC_TABLE_SIZE,MEM3_ALLOC_TABLE_SIZE};	
+const u32 memblksize[SRAMBANK]={MEM1_BLOCK_SIZE,MEM2_BLOCK_SIZE,MEM3_BLOCK_SIZE};					
+const u32 memsize[SRAMBANK]={MEM1_MAX_SIZE,MEM2_MAX_SIZE,MEM3_MAX_SIZE};						
+
 struct _m_mallco_dev mallco_dev=
 {
-	my_mem_init,							//�ڴ��ʼ��
-	my_mem_perused,						//�ڴ�ʹ����
-	mem1base,mem2base,mem3base,			//�ڴ��
-	mem1mapbase,mem2mapbase,mem3mapbase,//�ڴ����״̬��
-	0,0,0,  		 					//�ڴ����δ����
+	my_mem_init,
+	my_mem_perused,
+	{mem1base,mem2base,mem3base},
+	{mem1mapbase,mem2mapbase,mem3mapbase},
+	{0,0,0},
 };
 
-//�����ڴ�
-//*des:Ŀ�ĵ�ַ
-//*src:Դ��ַ
-//n:��Ҫ���Ƶ��ڴ泤��(�ֽ�Ϊ��λ)
 void mymemcpy(void *des,void *src,u32 n)
 {
 	u8 *xdes = des;

@@ -50,6 +50,8 @@ MEMORY
   FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 1024K
   RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 192K
   MEMORY_B1 (rx)  : ORIGIN = 0x60000000, LENGTH = 0K
+  MALLOC(rw)      : ORIGIN = 0x68000000, LENGTH = 1024K
+  CCMRAM (rw)     : ORIGIN = 0x10000000, LENGTH = 64K
 }
 
 /* Define output sections */
@@ -127,6 +129,25 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM
 
+  _siccmram = LOADADDR(.ccmram);
+
+  /* CCM-RAM section 
+  * 
+  * IMPORTANT NOTE! 
+  * If initialized variables will be placed in this section,
+  * the startup code needs to be modified to copy the init-values.  
+  */
+  .ccmram :
+  {
+    . = ALIGN(4);
+    _sccmram = .;       /* create a global symbol at ccmram start */
+    *(.ccmram)
+    *(.ccmram*)
+    
+    . = ALIGN(4);
+    _eccmram = .;       /* create a global symbol at ccmram end */
+  } >CCMRAM AT> FLASH
+
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -153,6 +174,18 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(4);
   } >RAM
+
+  //sunt 21.5.31
+  .malloc :
+  {
+    . = ALIGN(4);
+    __MALLOC_SYMBOLS = .;       /* create a global symbol at ccmram start */
+    *(.malloc)
+    *(.malloc*)
+    
+    . = ALIGN(4);
+    __EMALLOC_SYMBOLS = .;       /* create a global symbol at ccmram end */
+  } >MALLOC AT> FLASH
 
   /* MEMORY_bank1 section, code must be located here explicitly            */
   /* Example: extern int foo(void) __attribute__ ((section (".mb1text"))); */
